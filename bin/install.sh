@@ -24,7 +24,7 @@ fi
 if [[ "x$BOSH_COMMANDER_VERSION" == "x" ]]; then
     VERSION=$(curl -s https://api.github.com/repos/${OWNER}/${NAME}/releases/latest | grep tag_name | head -n 1 | cut -d '"' -f 4)
 else
-    VERSION=$BOSH_COMMANDER_VERSION
+    VERSION="v$BOSH_COMMANDER_VERSION"
 fi
 
 ARCHNUM=`getconf LONG_BIT`
@@ -42,7 +42,7 @@ FILENAME="${NAME}_${OS}_${ARCH}"
 if [[ "$OS" == "windows" ]]; then
     FILENAME="${FILENAME}.exe"
 fi
-LINK="https://github.com/${OWNER}/${NAME}/releases/download/v${VERSION}/${FILENAME}"
+LINK="https://github.com/${OWNER}/${NAME}/releases/download/${VERSION}/${FILENAME}"
 if [[ "$OS" == "windows" ]]; then
     FILEOUTPUT="${FILENAME}"
 else
