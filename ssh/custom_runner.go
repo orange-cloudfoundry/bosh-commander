@@ -14,19 +14,19 @@ type CustomRunner struct {
 	cmdRunner      boshsys.CmdRunner
 	sessionFactory func(boshssh.ConnectionOpts, boshdir.SSHResult) boshssh.Session
 
-	writerStdout   io.Writer
-	writerStderr   io.Writer
+	writerStdout io.Writer
+	writerStderr io.Writer
 
-	logTag         string
-	logger         boshlog.Logger
+	logTag string
+	logger boshlog.Logger
 }
 
 func NewCustomRunner(
-cmdRunner boshsys.CmdRunner,
-sessionFactory func(boshssh.ConnectionOpts, boshdir.SSHResult) boshssh.Session,
-writerStdout io.Writer,
-writerStderr io.Writer,
-logger boshlog.Logger,
+	cmdRunner boshsys.CmdRunner,
+	sessionFactory func(boshssh.ConnectionOpts, boshdir.SSHResult) boshssh.Session,
+	writerStdout io.Writer,
+	writerStderr io.Writer,
+	logger boshlog.Logger,
 ) CustomRunner {
 	return CustomRunner{
 		cmdRunner:      cmdRunner,

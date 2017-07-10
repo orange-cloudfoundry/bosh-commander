@@ -1,15 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"github.com/ArthurHlt/gominlog"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 	"github.com/urfave/cli"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
-	"strings"
 	"os"
-	"fmt"
+	"strings"
 )
 
 type BoshCommander struct {
@@ -35,7 +35,7 @@ func (b *BoshCommander) load(c *cli.Context) (err error) {
 		return
 	case "DEBUG":
 		loggerBosh = boshlog.NewWriterLogger(boshlog.LevelDebug, logWriter, logWriter)
-		logger = gominlog.NewMinLog("bosh-commander", gominlog.Ldebug, true, log.Ldate | log.Ltime)
+		logger = gominlog.NewMinLog("bosh-commander", gominlog.Ldebug, true, log.Ldate|log.Ltime)
 		logger.SetWriter(logWriter)
 		return
 	}

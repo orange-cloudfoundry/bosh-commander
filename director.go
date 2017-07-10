@@ -67,4 +67,3 @@ func buildDirector(boshDirector BoshDirector, uaa boshuaa.UAA) (boshdir.Director
 
 	return factory.New(config, boshdir.NewNoopTaskReporter(), boshdir.NewNoopFileReporter())
 }
-

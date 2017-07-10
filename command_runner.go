@@ -7,11 +7,11 @@ import (
 	boshssh "github.com/cloudfoundry/bosh-cli/ssh"
 	boshsys "github.com/cloudfoundry/bosh-utils/system"
 	boshuuid "github.com/cloudfoundry/bosh-utils/uuid"
+	"github.com/mitchellh/colorstring"
 	"github.com/orange-cloudfoundry/bosh-commander/ssh"
 	"io/ioutil"
 	"strconv"
 	"strings"
-	"github.com/mitchellh/colorstring"
 )
 
 type CommandRunner struct {
@@ -25,8 +25,8 @@ func NewCommandRunner(boshCommanderScript *BoshCommanderScript) *CommandRunner {
 	bufferedResult := new(bytes.Buffer)
 	provider := ssh.NewCustomProvider(boshsys.NewExecCmdRunner(loggerBosh), boshsys.NewOsFileSystem(loggerBosh), bufferedResult, ioutil.Discard, loggerBosh)
 	agent := &CommandRunner{
-		bufferedResult: bufferedResult,
-		provider:       provider,
+		bufferedResult:      bufferedResult,
+		provider:            provider,
 		boshCommanderScript: boshCommanderScript,
 	}
 	return agent
@@ -149,7 +149,7 @@ func (a *CommandRunner) createCommandSlice(command string) []string {
 		} else {
 			text += " " + splitCommand
 		}
-		if len(splitCommand) > 1 && string(splitCommand[len(splitCommand) - 1]) == identifier {
+		if len(splitCommand) > 1 && string(splitCommand[len(splitCommand)-1]) == identifier {
 			identifier = ""
 			finalCommands = append(finalCommands, text)
 			text = ""
@@ -158,6 +158,7 @@ func (a *CommandRunner) createCommandSlice(command string) []string {
 	}
 	return finalCommands
 }
+
 func (a *CommandRunner) FindBoshSshInstances(boshDirector boshdir.Director, jobName Regexp, inDeplNames ...Regexp) ([]BoshSshInstance, error) {
 	boshSshInstances := make([]BoshSshInstance, 0)
 	var deployments []boshdir.Deployment
@@ -183,7 +184,7 @@ func (a *CommandRunner) FindBoshSshInstances(boshDirector boshdir.Director, jobN
 			}
 			boshSshInstances = append(boshSshInstances, BoshSshInstance{
 				Deployment: deployment,
-				Instance: vm,
+				Instance:   vm,
 			})
 		}
 	}

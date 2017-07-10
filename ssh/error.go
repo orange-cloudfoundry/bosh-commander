@@ -9,7 +9,7 @@ type ErrCommandSsh struct {
 
 func NewErrCommandSsh(message string, exitCode int) error {
 	return ErrCommandSsh{
-		message: message,
+		message:  message,
 		exitCode: exitCode,
 	}
 }

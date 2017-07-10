@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/ArthurHlt/gominlog"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
+	"github.com/urfave/cli"
 	"io"
 	"log"
 	"os"
-	"github.com/urfave/cli"
 	"os/user"
 	"path/filepath"
 )
@@ -17,7 +17,7 @@ var logWriter io.Writer
 
 func init() {
 	logWriter = os.Stderr
-	logger = gominlog.NewMinLog("bosh-commander", gominlog.Linfo, true, log.Ldate | log.Ltime)
+	logger = gominlog.NewMinLog("bosh-commander", gominlog.Linfo, true, log.Ldate|log.Ltime)
 	logger.SetWriter(logWriter)
 	loggerBosh = boshlog.NewWriterLogger(boshlog.LevelInfo, logWriter, logWriter)
 }

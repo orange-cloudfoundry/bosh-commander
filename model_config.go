@@ -1,9 +1,9 @@
 package main
 
 import (
-	"io/ioutil"
 	"fmt"
 	boshdir "github.com/cloudfoundry/bosh-cli/director"
+	"io/ioutil"
 	"regexp"
 	"strings"
 )
@@ -40,14 +40,14 @@ func (c *Config) UnmarshalYAML(unmarshal func(interface{}) error) error {
 }
 
 type BoshDirector struct {
-	Name        string  `yaml:"name"`
-	Username    string  `yaml:"username"`
-	Password    string  `yaml:"password"`
-	DirectorUrl string  `yaml:"director_url"`
-	CACert      string  `yaml:"ca_cert"`
-	CACertFile  string  `yaml:"ca_cert_file"`
-	UaaUrl      string  `yaml:"uaa_url"`
-	Gateway     Gateway `yaml:"gateway"`
+	Name        string                 `yaml:"name"`
+	Username    string                 `yaml:"username"`
+	Password    string                 `yaml:"password"`
+	DirectorUrl string                 `yaml:"director_url"`
+	CACert      string                 `yaml:"ca_cert"`
+	CACertFile  string                 `yaml:"ca_cert_file"`
+	UaaUrl      string                 `yaml:"uaa_url"`
+	Gateway     Gateway                `yaml:"gateway"`
 	XXX         map[string]interface{} `yaml:",inline" json:"-"`
 }
 type Gateway struct {
@@ -98,11 +98,11 @@ func (boshDir *BoshDirector) LoadCaCertFile() error {
 }
 
 type BoshCommanderScript struct {
-	JobMatch    Regexp `yaml:"job_match"`
-	Deployments []Regexp `yaml:"deployments"`
-	Sudo        bool `yaml:"sudo"`
-	Script      []string `yaml:"script"`
-	AfterAll    []string `yaml:"after_all"`
+	JobMatch    Regexp                 `yaml:"job_match"`
+	Deployments []Regexp               `yaml:"deployments"`
+	Sudo        bool                   `yaml:"sudo"`
+	Script      []string               `yaml:"script"`
+	AfterAll    []string               `yaml:"after_all"`
 	XXX         map[string]interface{} `yaml:",inline" json:"-"`
 }
 

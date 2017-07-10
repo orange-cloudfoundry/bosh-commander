@@ -19,11 +19,9 @@ func (r CustomNonInteractiveRunner) Run(connOpts boshssh.ConnectionOpts, result 
 	if len(result.Hosts) == 0 {
 		return bosherr.Errorf("Non-interactive SSH expects at least one host")
 	}
-
 	if len(rawCmd) == 0 {
 		return bosherr.Errorf("Non-interactive SSH expects non-empty command")
 	}
-
 	cmdFactory := func(host boshdir.Host) boshsys.Command {
 		return boshsys.Command{
 			Name: "ssh",
