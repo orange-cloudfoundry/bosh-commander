@@ -1,0 +1,10 @@
+job_match: consul.*
+sudo: true
+deployments:
+- cloudfoundry.*
+script:
+- monit stop all
+- rm -rf /var/vcap/store/consul_agent/*
+after_all:
+- monit start all
+- sleep 2m
