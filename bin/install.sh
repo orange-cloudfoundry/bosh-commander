@@ -22,7 +22,7 @@ else
 fi
 
 if [[ "x$BOSH_COMMANDER_VERSION" == "x" ]]; then
-    VERSION=$(curl -s https://api.github.com/repos/${OWNER}/${REPO_NAME}/releases/latest | grep tag_name | head -n 1 | cut -d '"' -f 4)
+    VERSION=$(curl -s https://api.github.com/repos/${OWNER}/${NAME}/releases/latest | grep tag_name | head -n 1 | cut -d '"' -f 4)
 else
     VERSION=$BOSH_COMMANDER_VERSION
 fi
