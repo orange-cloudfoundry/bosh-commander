@@ -51,6 +51,8 @@ bosh_directors:
   password: myboshpassword
   uaa_url: https://127.0.0.1:8443 # if you use use an uaa url, it will use uaa to authenticate user
   ca_cert_file: path/to/pem.pem
+  client_id: ~ # if you use a special client for uaa you should set it
+  client_secret: ~ # if you use a special client for uaa you should set it
 ```
 
 You will now have to create a script file to perform commands on your vm following this schema:

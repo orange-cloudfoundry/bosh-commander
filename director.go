@@ -30,11 +30,10 @@ func buildUAA(boshDirector BoshDirector) (boshuaa.UAA, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	// Set client credentials for authentication.
 	// Machine level access should typically use a client instead of a particular user.
-	config.Client = boshDirector.Username
-	config.ClientSecret = boshDirector.Password
+	config.Client = boshDirector.ClientId
+	config.ClientSecret = boshDirector.ClientSecret
 
 	// Configure trusted CA certificates.
 	// If nothing is provided default system certificates are used.
@@ -52,18 +51,30 @@ func buildDirector(boshDirector BoshDirector, uaa boshuaa.UAA) (boshdir.Director
 	if err != nil {
 		return nil, err
 	}
-
 	// Configure custom trusted CA certificates.
 	// If nothing is provided default system certificates are used.
 	config.CACert = boshDirector.CACert
 
 	// Allow Director to fetch UAA tokens when necessary.
 	if uaa != nil {
-		config.TokenFunc = boshuaa.NewClientTokenSession(uaa).TokenFunc
+		token, err := uaa.OwnerPasswordCredentialsGrant([]boshuaa.PromptAnswer{
+			{
+				Key:   "username",
+				Value: boshDirector.Username,
+			},
+			{
+				Key:   "password",
+				Value: boshDirector.Password,
+			},
+		})
+		if err != nil {
+			return nil, err
+		}
+		config.TokenFunc = boshuaa.NewAccessTokenSession(token).TokenFunc
 	} else {
 		config.Client = boshDirector.Username
 		config.ClientSecret = boshDirector.Password
 	}
-
+	uaa.ClientCredentialsGrant()
 	return factory.New(config, boshdir.NewNoopTaskReporter(), boshdir.NewNoopFileReporter())
 }

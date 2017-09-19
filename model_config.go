@@ -40,9 +40,12 @@ func (c *Config) UnmarshalYAML(unmarshal func(interface{}) error) error {
 }
 
 type BoshDirector struct {
-	Name        string                 `yaml:"name"`
-	Username    string                 `yaml:"username"`
-	Password    string                 `yaml:"password"`
+	Name         string `yaml:"name"`
+	ClientId     string `yaml:"client_id"`
+	ClientSecret string `yaml:"client_secret"`
+	Username     string `yaml:"username"`
+	Password     string `yaml:"password"`
+
 	DirectorUrl string                 `yaml:"director_url"`
 	CACert      string                 `yaml:"ca_cert"`
 	CACertFile  string                 `yaml:"ca_cert_file"`
@@ -66,6 +69,10 @@ func (c *BoshDirector) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	}
 	if c.DirectorUrl == "" {
 		return fmt.Errorf("You must set the url to your director.")
+	}
+	if c.ClientId == "" {
+		c.ClientId = "bosh_cli"
+		c.ClientSecret = ""
 	}
 	return checkOverflow(c.XXX, "config")
 }
