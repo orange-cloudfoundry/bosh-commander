@@ -24,8 +24,9 @@ func (r CustomNonInteractiveRunner) Run(connOpts boshssh.ConnectionOpts, result 
 	}
 	cmdFactory := func(host boshdir.Host) boshsys.Command {
 		return boshsys.Command{
-			Name: "ssh",
-			Args: append([]string{host.Host, "-l", host.Username}, rawCmd...),
+			Name:         "ssh",
+			KeepAttached: true,
+			Args:         append([]string{host.Host, "-l", host.Username}, rawCmd...),
 		}
 	}
 
