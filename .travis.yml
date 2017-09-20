@@ -8,6 +8,7 @@ script:
 after_success:
 - bin/build_all
 deploy:
+
   provider: releases
   api_key:
     secure: S5ZkMkZbJpGHmDnhGuwy22V3CvsCAxLKQoHvCG1VMRcSYPOfRid8eadPL+B0T9WQOFmL2NS41vhJLA1TfKnrTS+oClDIyDca4WClBJt8yJA7d9nKiAAn7Dpiss4YXmJUqmeD3zn8cotLz+GpJMlcJJPK1pJ40YngKcWI8U5rs1g8rUode3nsAyzWlY/5qs8xcN2Ix9Gscz0YrxHO/etqc32l24p5zEYjerKvalUnp55QPoDgiFhs6ThX+yMqPA2UEH6Y+XK8jDAiCfogYMlI0eYBmTvhy+wEmSnfvCtcaaLnb3obt5fnasPW+q97g1vvgG2jXl6dib5ByjTb+SHhXC+ZMwWnwcw5mRnJd6L+1Bc1xkBWAPagCD3GoJYtKSX9LKEAmBYtlX2U9RnlfBw1P+nFCqeRVkSwdxKacwqgagT2aWAnAyhsrBA3zgD9weqHKcaR4uYwLgQRGNVhJdGCoFmGRj2II1cRQeYeWsS5G3z3GWfDjW2T2lD4Hibyx7698Mi9brs2L6YbEhrNvlxrgZ5nBO2GtPquNjUQ23FNjgPuMeTpdWDnpJXhAtNxf8q9n0YW3DoLhRr5Pqgp7mrxikSuiXqlTOAPwTQBqOFPO+lLe22eySWuOsc1Qk+FIDXz9b08Q2VNOwXjerAmM3myXbW2fR9t7we+2ss344exHvA=
@@ -20,3 +21,4 @@ deploy:
   on:
     tags: true
     all_branches: true
+  skip_cleanup: true
