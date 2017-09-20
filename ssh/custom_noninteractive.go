@@ -5,6 +5,7 @@ import (
 	boshssh "github.com/cloudfoundry/bosh-cli/ssh"
 	bosherr "github.com/cloudfoundry/bosh-utils/errors"
 	boshsys "github.com/cloudfoundry/bosh-utils/system"
+	"os"
 )
 
 type CustomNonInteractiveRunner struct {
@@ -25,8 +26,9 @@ func (r CustomNonInteractiveRunner) Run(connOpts boshssh.ConnectionOpts, result 
 	cmdFactory := func(host boshdir.Host) boshsys.Command {
 		return boshsys.Command{
 			Name:         "ssh",
-			KeepAttached: true,
 			Args:         append([]string{host.Host, "-l", host.Username}, rawCmd...),
+			KeepAttached: true,
+			Stdin:        os.Stdin,
 		}
 	}
 
