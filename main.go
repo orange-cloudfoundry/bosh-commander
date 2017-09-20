@@ -31,7 +31,7 @@ func main() {
 		return
 	}
 	app.Name = "bosh-commander"
-	app.Version = "1.0.0"
+	app.Version = "1.1.1"
 	app.Usage = "Run commands on targetted job name on multiple bosh"
 	app.Commands = []cli.Command{
 		{
